@@ -5,15 +5,10 @@
 * Prof. Darwin C. Vargas, MIT
 * Oct. 5, 2026.
   
-* **Executive Summary:** Overview of the linear subsystem, audit findings, and
-refactoring strategies applied.
+* **Executive Summary:** This project audits and refactors LegacyLinearSubsystem.cpp, a legacy C++ module that stores records in a dynamic integer array and transposes a 3x3 matrix. The audit found several defects: mutable global variables, a memory leak on every array resize, a missing delete[] at program exit, an off-by-one over-read in printAll(), no upper-bound check in remove_item_at(), redundant nested loops in deletion and search, inconsistent naming, and a hardcoded matrix size. To fix these, I wrapped all data in a DynamicArray class with RAII memory management, rewrote resizing to free the old buffer, added bounds checking to every index-based operation, replaced the nested loops with single-pass routines, applied consistent naming, and generalized the matrix transpose to accept dimensions as parameters. The refactoring does not change the Big-O complexity of deletion (O(n)) or search (O(n)), but it removes constant-factor overhead and makes the code easier to read.
 
-* **Build & Compilation Commands:** Explicit terminal instructions for compiling and
-executing the code across platforms.
+* **Build & Compilation Commands:** On Windows with MinGW, use the same compile command with backslashes in the paths and run Refactored_Code\refactored_app.exe. The expected result is zero compiler warnings and zero leak reports.
 
-* **Module Architecture Overview:** Description of classes, member variables, and
-functions.
+* **Module Architecture Overview:** The module is built around one class, DynamicArray, split into DynamicArray.h and DynamicArray.cpp. It has three private member variables: data_ (a pointer to the heap buffer), size_ (the number of stored elements), and capacity_ (the number of allocated slots). The constructor allocates the buffer and the destructor frees it with delete[]. The public functions are addItem() to append a value, removeItemAt() to delete at a validated index and shift the remaining elements left, findItem() to search linearly, printAll() to display the contents, and getSize() and getCapacity() as const accessors. A private resize() function allocates a larger buffer, copies the elements, frees the old buffer, and updates the pointer and capacity. RefactoredLinearSubsystem.cpp is the driver program that runs the test scenarios.
 
-* **Milestone 1 Preparedness Statement:** Brief declaration explaining how this
-synthesized linear subsystem prepares your codebase for the upcoming Milestone 1
-submission.
+* **Milestone 1 Preparedness Statement:**This synthesized subsystem prepares my codebase for Milestone 1 because memory is now managed automatically through the constructor and destructor, so later modules cannot leak it by accident. All the baseline defects were tested, fixed, and verified in the regression table. Every change is documented with a Before, Problem, After, and Justification entry and a Big-O analysis, so I can explain my pointer operations, memory choices, and complexity derivations during the oral defense.
