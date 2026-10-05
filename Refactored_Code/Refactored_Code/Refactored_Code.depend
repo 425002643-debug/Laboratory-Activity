@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1791208205 source:c:\users\shair\downloads\refactored_code\dynamicarray.cpp
+	"DynamicArray.h"
+	<iostream>
+
+1791208205 c:\users\shair\downloads\refactored_code\dynamicarray.h
+
+1791208714 source:c:\users\shair\downloads\refactored_code\refactored_code\dynamicarray.cpp
+	"DynamicArray.h"
+	<iostream>
+
+1791208714 c:\users\shair\downloads\refactored_code\refactored_code\dynamicarray.h
+
+1791208342 source:c:\users\shair\downloads\refactored_code\refactored_code\refactoredlinearsubsystem.cpp
+	<iostream>
+	"DynamicArray.h"
+
